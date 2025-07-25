@@ -1,3 +1,97 @@
+# AWS ChatService Angular 20.1.2
+
+### Structure
+```
+src/
+├── assets/
+│
+└── app/
+    ├── core/                      # Funciones esenciales y globales
+    │   ├── services/              # Servicios singleton (ej: Auth, Socket, API base)
+    │   ├── interceptors/          # HTTP interceptors
+    │   ├── guards/                # Guards de rutas
+    │   ├── models/                # Modelos globales (User, Message, etc.)
+    │   └── utils/                 # Funciones reutilizables (helpers)
+    │
+    ├── shared/                    # Componentes, pipes y módulos reutilizables
+    │   ├── components/            # Ej: Button, Modal, Avatar, etc.
+    │   ├── directives/
+    │   └── pipes/
+    │
+    ├── features/                  # Funcionalidades agrupadas (modular)
+    │   ├── chat/                  # Todo lo relacionado al chat
+    │   │   ├── components/        # ChatRoomList, MessageList, ChatHeader, etc.
+    │   │   ├── pages/             # ChatPage, NewChatPage, etc.
+    │   │   ├── services/          # ChatService, MessageService
+    │   │   └── chat-routing.module.ts
+    │   │
+    │   └── user/                  # Funcionalidad de usuarios
+    │       ├── components/        # UserList, UserCard, etc.
+    │       ├── pages/             # UserProfilePage, etc.
+    │       ├── services/          # UserService
+    │       └── user-routing.module.ts
+    │
+    ├── layout/                    # Layouts generales (con sidebar, sin sidebar, etc.)
+    │   └── main-layout/           # Header, sidebar, footer, etc.
+    │       ├── components/
+    │       │   ├── footerbar/
+    │       │   └── navbar/    
+    │       ├── main-layout.html  
+    │       └── main-layout.ts
+    │
+    ├── pages/                     # Páginas no relacionadas con features (Landing, Error 404, Login)
+    │   ├── home/
+    │   │   ├── components/    
+    │   │   ├── home.html  
+    │   │   └── home.ts    
+    │   ├── login/
+    │   └── not-found/
+    │
+    ├── app-routing.module.ts
+    └── app.component.ts
+```
+
+### Commands
+```bash
+ng generate component layout/main-layout
+ng generate component layout/main-layout/components/navbar
+ng generate component layout/main-layout/components/footerbar
+
+ng generate component pages/home
+ng generate component pages/home/components/navigation
+ng generate component pages/home/components/navigation/tabs
+ng generate component pages/home/components/navigation/rooms-list
+ng generate component pages/home/components/navigation/users-list
+ng generate component pages/home/components/chat-area
+ng generate component pages/home/components/chat-area/message-list
+ng generate component pages/home/components/chat-area/chat-input
+
+ng generate component pages/not-found
+```
+
+## app.routes.ts
+```typescript
+import { Routes } from '@angular/router';
+import { MainLayout } from './layout/main-layout/main-layout';
+import { Home } from './pages/home/home';  
+
+export const routes: Routes = [
+  {
+    path: '',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        component: Home
+      }
+    ]
+  }
+];
+```
+
+---
+---
+
 # AWSChatServiceAngular
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.2.
