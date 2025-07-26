@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { ApiResponse } from '@core/models/api-response';
-import { Room } from '@core/models/room';
+import { Room, RoomCreate } from '@core/models/room';
 import { RoomService } from '@core/services/room-service';
 import { Error } from '@shared/components/error/error';
 import { Loading } from '@shared/components/loading/loading';
@@ -33,5 +33,19 @@ export class RoomsList {
       },
       complete: () => this.isLoading.set(false),
     });
-  } 
+  }
+
+  createRoom() {
+    const newRoom: RoomCreate = {
+      name: 'Nueva Sala'
+    };
+
+    this.isLoading.set(true);    
+
+    this.roomService.createRoom(newRoom).subscribe({
+      next: (response) => console.log('Sala creada:', response.data),
+      error: (err) => console.error('Error al crear sala:', err),
+      complete: () => this.isLoading.set(false),
+    });
+  }
 }

@@ -3,3 +3,7 @@ export interface Room {
   name: string;
   createdAt: Date;
 }
+
+export interface RoomCreate {
+  name: string;
+}
