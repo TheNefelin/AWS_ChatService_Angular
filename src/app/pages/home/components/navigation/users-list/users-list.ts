@@ -1,16 +1,21 @@
-import { Component } from '@angular/core';
-import { JsonPipe } from '@angular/common';
+import { Component, signal } from '@angular/core';
 import { ApiResponse } from '@core/models/api-response';
 import { User } from '@core/models/user';
 import { UserService } from '@core/services/user-service';
+import { Error } from '@shared/components/error/error';
+import { Loading } from '@shared/components/loading/loading';
 
 @Component({
   selector: 'app-users-list',
-  imports: [JsonPipe],
+  imports: [
+    Loading,
+    Error
+  ],
   templateUrl: './users-list.html',
 })
 export class UsersList {
-  apiResponseUser: ApiResponse<User[]> | null = null;
+  readonly apiResponseUser = signal<ApiResponse<User[]> | null>(null);
+  readonly isLoading = signal(false);
 
   constructor(private userService: UserService) {}
 
@@ -19,6 +24,15 @@ export class UsersList {
   }
 
   private loadData() {
-    this.userService.getUsers().subscribe(data => this.apiResponseUser = data);
+    this.isLoading.set(true);
+
+    this.userService.getUsers().subscribe({
+      next: (data) => this.apiResponseUser.set(data),
+      error: (err) => {
+        console.error('Error:', err);
+        // Ya viene como ApiResponse en caso de error, así que lo manejas en el HTML.
+      },
+      complete: () => this.isLoading.set(false),
+    });
   }
 }

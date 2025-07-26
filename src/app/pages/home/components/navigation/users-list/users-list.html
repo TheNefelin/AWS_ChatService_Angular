@@ -1,43 +1,32 @@
 <ul class="list bg-base-100 rounded-box shadow-md">
   
-  <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Most played songs this week</li>
+  <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Lista de Usuarios Conectados</li>
   
-  <li class="list-row">
-    <div class="text-4xl font-thin opacity-30 tabular-nums">01</div>
-    <div><img class="size-10 rounded-box" src="/assets/user.svg" alt="User"/></div>
-    <div class="list-col-grow">
-      <div>Id: 111111</div>
-      <div class="text-xs uppercase font-semibold opacity-60">Chrollo Lucilfer</div>
-    </div>
-    <button class="btn btn-ghost">
-      Entrar  
-    </button>
-  </li>
-  
-  <li class="list-row">
-    <div class="text-4xl font-thin opacity-30 tabular-nums">02</div>
-    <div><img class="size-10 rounded-box" src="/assets/user.svg" alt="User"/></div>
-    <div class="list-col-grow">
-      <div>Id: 222222</div>
-      <div class="text-xs uppercase font-semibold opacity-60">Neferpitou</div>
-    </div>
-    <button class="btn btn-ghost">
-      Entrar  
-    </button>
-  </li>
-  
-  <li class="list-row">
-    <div class="text-4xl font-thin opacity-30 tabular-nums">03</div>
-    <div><img class="size-10 rounded-box" src="/assets/user.svg" alt="User"/></div>
-    <div class="list-col-grow">
-      <div>Id: 333333</div>
-      <div class="text-xs uppercase font-semibold opacity-60">Isaac Netero</div>
-    </div>
-    <button class="btn btn-ghost">
-      Entrar  
-    </button>
-  </li>
-  
-</ul>
+  @if (isLoading()) {
+    <app-loading></app-loading>
+  } @else {
 
-<pre>{{ apiResponseUser | json }}</pre>
+    @if (!apiResponseUser()?.isSuccess) {
+      <app-error
+        [statusCode]="apiResponseUser()?.statusCode"
+        [message]="apiResponseUser()?.message">
+      </app-error>
+    } @else {
+
+      @for (user of apiResponseUser()?.data; track user.id; let i = $index) {
+        <li class="list-row">
+          <div class="text-4xl font-thin opacity-30 tabular-nums">{{ i + 1 }}</div>
+          <div><img class="size-10 rounded-box" src="/assets/user.svg" alt="User"/></div>
+          <div class="list-col-grow">
+            <div>{{ user.id }}</div>
+            <div class="text-xs uppercase font-semibold opacity-60">{{ user.username }}</div>
+          </div>
+          <button class="btn btn-ghost">
+            Entrar  
+          </button>
+        </li>
+      }
+    }
+  }
+
+</ul>

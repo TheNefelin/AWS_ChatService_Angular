@@ -57,16 +57,11 @@ src/
     └── app.component.ts
 ```
 
-### Activar HTTP
-- server.ts
-```typescript
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
-```
-
 ### Commands
 - Components
 ```bash
 ng generate component shared/components/loading
+ng generate component shared/components/error
 
 ng generate component layout/main-layout
 ng generate component layout/main-layout/components/navbar
@@ -122,8 +117,24 @@ export const routes: Routes = [
 }
 ```
 
----
----
+## environment.ts
+- src/environments/environment.ts
+```typescript
+export const environment = {
+  production: false,
+  ignoreSSL: true,
+  apiBaseUrl: 'https://localhost:7081/api'
+};
+```
+
+## server.ts
+```typescript
+// Configuración SSL segura
+if (!environment.production && environment.ignoreSSL) {
+  process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+  console.warn('⚠️  SSL verification disabled (development only)');
+}
+```
 
 # AWSChatServiceAngular
 

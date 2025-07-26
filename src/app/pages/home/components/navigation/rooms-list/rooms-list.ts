@@ -1,16 +1,21 @@
-import { Component } from '@angular/core';
-import { JsonPipe } from '@angular/common';
+import { Component, signal } from '@angular/core';
 import { ApiResponse } from '@core/models/api-response';
 import { Room } from '@core/models/room';
 import { RoomService } from '@core/services/room-service';
+import { Error } from '@shared/components/error/error';
+import { Loading } from '@shared/components/loading/loading';
 
 @Component({
   selector: 'app-rooms-list',
-  imports: [JsonPipe],
+  imports: [
+    Loading,
+    Error
+  ],
   templateUrl: './rooms-list.html',
 })
 export class RoomsList {
-  apiResponseRoom: ApiResponse<Room[]> | null = null;
+  readonly apiResponseRoom = signal<ApiResponse<Room[]> | null>(null);  
+  readonly isLoading = signal(false);  
 
   constructor(private roomService: RoomService) {}
 
@@ -19,6 +24,14 @@ export class RoomsList {
   }
 
   private loadData() {
-    this.roomService.getRooms().subscribe(data => this.apiResponseRoom = data);
-  }
+    this.isLoading.set(true);
+
+    this.roomService.getRooms().subscribe({
+      next: (data) => this.apiResponseRoom.set(data),
+      error: (err) => {
+        console.error('Error:', err);
+      },
+      complete: () => this.isLoading.set(false),
+    });
+  } 
 }
