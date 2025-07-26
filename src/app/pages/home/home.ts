@@ -6,10 +6,9 @@ import { ChatArea } from './components/chat-area/chat-area';
   selector: 'app-home',
   imports: [
     Navigation,
-    ChatArea,
+    ChatArea
   ],
   templateUrl: './home.html',
-  styleUrl: './home.css'
 })
 export class Home {
 

@@ -66,3 +66,5 @@ if (isMainModule(import.meta.url)) {
  * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
  */
 export const reqHandler = createNodeRequestHandler(app);
+
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';

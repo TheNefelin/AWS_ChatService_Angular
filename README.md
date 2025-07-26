@@ -41,7 +41,13 @@ src/
     │
     ├── pages/                     # Páginas no relacionadas con features (Landing, Error 404, Login)
     │   ├── home/
-    │   │   ├── components/    
+    │   │   ├── components/
+    │   │   │   ├── chat-area/
+    │   │   │   │   ├── chat-input/
+    │   │   │   │   └── message-list/         
+    │   │   │   └── navigation/   
+    │   │   │       ├── rooms-list/
+    │   │   │       └── users-list/        
     │   │   ├── home.html  
     │   │   └── home.ts    
     │   ├── login/
@@ -51,8 +57,17 @@ src/
     └── app.component.ts
 ```
 
+### Activar HTTP
+- server.ts
+```typescript
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+```
+
 ### Commands
+- Components
 ```bash
+ng generate component shared/components/loading
+
 ng generate component layout/main-layout
 ng generate component layout/main-layout/components/navbar
 ng generate component layout/main-layout/components/footerbar
@@ -67,6 +82,11 @@ ng generate component pages/home/components/chat-area/message-list
 ng generate component pages/home/components/chat-area/chat-input
 
 ng generate component pages/not-found
+```
+- Services
+```bash
+ng generate service core/services/user-service
+ng generate service core/services/room-service
 ```
 
 ## app.routes.ts
