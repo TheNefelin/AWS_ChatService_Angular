@@ -6,6 +6,7 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
+import { environment } from './environments/environment';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
@@ -67,4 +68,8 @@ if (isMainModule(import.meta.url)) {
  */
 export const reqHandler = createNodeRequestHandler(app);
 
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+// Configuración SSL segura
+if (!environment.production && environment.ignoreSSL) {
+  process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+  console.warn('⚠️  SSL verification disabled (development only)');
+}

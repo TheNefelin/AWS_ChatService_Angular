@@ -5,8 +5,9 @@
     (change)="onTabChanged('rooms')"
   />
   <div class="tab-content bg-base-100 border-base-300 p-6">
-    <app-rooms-list></app-rooms-list>
-    <pre>{{ apiResponseRoom | json }}</pre>
+    @if (selectedTab === 'rooms') {
+      <app-rooms-list></app-rooms-list>
+    }
   </div>
 
   <input type="radio" name="my_tabs_3" class="tab" aria-label="Usuarios" 
@@ -14,25 +15,8 @@
     (change)="onTabChanged('users')"  
   />
   <div class="tab-content bg-base-100 border-base-300 p-6">
-    <app-users-list></app-users-list>
-    <pre>{{ apiResponseUser | json }}</pre>
+    @if (selectedTab === 'users') {
+      <app-users-list></app-users-list>
+    }
   </div>
 </div>
-
-<h1>{{ selectedTab }}</h1>
-<pre>{{ apiResponseRoom | json }}</pre>
-<pre>{{ apiResponseUser | json }}</pre>
-
-<!-- @if (selectedTab === 'rooms') {
-  <pre>{{ apiResponseRoom | json }}</pre>
-}
-@else {
-  <p>No hay Salas</p>
-}
-
-@if (selectedTab === 'users') {
-  <pre>{{ apiResponseUser | json }}</pre>
-}
-@else {
-  <p>No hay usuarios</p>
-} -->

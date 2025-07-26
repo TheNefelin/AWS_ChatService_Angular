@@ -109,6 +109,19 @@ export const routes: Routes = [
 ];
 ```
 
+## tsconfig.json
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@core/*": ["app/core/*"],
+      "@shared/*": ["app/shared/*"]
+    }
+  }
+}
+```
+
 ---
 ---
 

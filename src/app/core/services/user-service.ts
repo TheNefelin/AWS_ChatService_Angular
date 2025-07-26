@@ -3,16 +3,17 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../models/api-response';
 import { User } from '../models/user';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'https://localhost:7081/api/Users';
+  private _apiUrl = `${environment.apiBaseUrl}/Users`;
 
   constructor(private http:HttpClient) {}
   
   getUsers(): Observable<ApiResponse<User[]>> {
-    return this.http.get<ApiResponse<User[]>>(this.apiUrl);
+    return this.http.get<ApiResponse<User[]>>(this._apiUrl);
   }
 }
