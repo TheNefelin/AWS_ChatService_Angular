@@ -1,6 +1,12 @@
 <fieldset class="w-full flex items-center gap-4 bg-base-200 border-base-300 border rounded-box p-4 shadow-2xl">
-  <input type="email" class="input input-bordered flex-1" placeholder="Crear Sala" />
-  <button class="btn btn-neutral">Crear</button>
+  <input type="text" class="input input-bordered flex-1" placeholder="Crear Sala" 
+    [(ngModel)]="newRoomName"
+    (keyup.enter)="createRoom()"
+  />
+  <button 
+    class="btn btn-neutral"
+    (click)="createRoom()"
+  >Crear</button>
 </fieldset>
 
 <ul class="list bg-base-100 rounded-box shadow-md mt-4">
@@ -8,12 +14,12 @@
   <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Lista de Salas Creadas</li>
   
   @if (isLoading()) {
-    <app-loading></app-loading>
+    <app-loading/>
   } @else {
     @if (!apiResponseRoom()?.isSuccess) {
       <app-error
-        [statusCode]="apiResponseRoom()?.statusCode"
-        [message]="apiResponseRoom()?.message">
+        [statusCode]="404"
+        [message]="'Sin Salas'">
       </app-error>
     } @else {
       @for(room of apiResponseRoom()?.data; track room.id; let i = $index) {
@@ -23,7 +29,10 @@
             <div>{{ room.id }}</div>
             <div class="text-xs uppercase font-semibold opacity-60">{{ room.name }}</div>
           </div>
-          <button class="btn btn-ghost">
+          <button 
+            class="btn btn-ghost"
+            (click)="onRoomClick(room.id)"
+          >
             Entrar
           </button>
         </li>

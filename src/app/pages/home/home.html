@@ -1,5 +1,8 @@
-
-<div class="container mx-auto p-4 flex flex-col md:flex-row gap-4">
-  <app-navigation></app-navigation>
-  <app-chat-area></app-chat-area>
+<div class="container mx-auto p-4 flex flex-col justify-center md:flex-row gap-4">
+  <app-navigation
+    (roomSelected)="selectedRoomId.set($event)"
+  />
+  <app-chat-area
+    [roomId]="selectedRoomId()"
+  />
 </div>

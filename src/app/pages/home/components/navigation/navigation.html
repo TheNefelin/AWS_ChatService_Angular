@@ -4,9 +4,11 @@
     [checked]="selectedTab === 'rooms'"
     (change)="onTabChanged('rooms')"
   />
-  <div class="tab-content bg-base-100 border-base-300 p-6">
+  <div class="tab-content bg-base-100 border-base-300 p-6 max-h-96 overflow-y-auto">
     @if (selectedTab === 'rooms') {
-      <app-rooms-list></app-rooms-list>
+      <app-rooms-list
+        (roomSelected)="roomSelected.emit($event)"
+      />
     }
   </div>
 
@@ -14,7 +16,7 @@
     [checked]="selectedTab === 'users'"
     (change)="onTabChanged('users')"  
   />
-  <div class="tab-content bg-base-100 border-base-300 p-6">
+  <div class="tab-content bg-base-100 border-base-300 p-6 max-h-96 overflow-y-auto">
     @if (selectedTab === 'users') {
       <app-users-list></app-users-list>
     }

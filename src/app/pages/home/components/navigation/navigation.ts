@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { RoomsList } from './rooms-list/rooms-list';
 import { UsersList } from './users-list/users-list';
 
@@ -11,6 +11,7 @@ import { UsersList } from './users-list/users-list';
   templateUrl: './navigation.html',
 })
 export class Navigation {
+  @Output() roomSelected = new EventEmitter<string>();
   selectedTab: 'rooms' | 'users' = 'users';
 
   constructor() {}

@@ -1,16 +1,24 @@
-<div class="chat chat-start">
-  <div class="chat-bubble chat-bubble-primary">¿AWS está caído otra vez?</div>
-</div>
-<div class="chat chat-start">
-  <div class="chat-bubble chat-bubble-secondary">No... es solo tu facturación que se disparó 😅</div>
-</div>
-<div class="chat chat-start">
-  <div class="chat-bubble chat-bubble-accent">JAJA no toques Lambda sin presupuesto, bro</div>
+<!-- <div class="chat chat-end">
+  <div class="chat-bubble chat-bubble-secondary">Bien hecho. También revisa los S3 públicos 😬</div>
+</div> -->
+
+<div role="alert" class="alert mb-4">
+  <span>Sala: {{ roomId }}</span>
 </div>
 
-<div class="chat chat-end">
-  <div class="chat-bubble chat-bubble-info">Tranquilos, ya activé el presupuesto con alertas</div>
-</div>
-<div class="chat chat-end">
-  <div class="chat-bubble chat-bubble-success">Bien hecho. También revisa los S3 públicos 😬</div>
-</div>
+@if (isLoading()) {
+  <app-loading></app-loading>
+} @else {
+     @if (!apiResponseMessage()?.isSuccess) {
+      <app-error
+        [statusCode]="404"
+        [message]="'Sin Mensajes'">
+      </app-error>
+    } @else {
+      @for (message of apiResponseMessage()?.data; track $index) {
+        <div class="chat chat-start">
+          <div class="chat-bubble chat-bubble-primary">{{ message.content }}</div>
+        </div>
+      }
+    }
+}

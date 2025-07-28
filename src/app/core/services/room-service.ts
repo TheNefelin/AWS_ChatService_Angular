@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '@core/models/api-response';
 import { Room, RoomCreate } from '@core/models/room';
-import { environment } from '../../../environments/environment';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'

@@ -7,16 +7,11 @@ src/
 │
 └── app/
     ├── core/                      # Funciones esenciales y globales
-    │   ├── services/              # Servicios singleton (ej: Auth, Socket, API base)
-    │   ├── interceptors/          # HTTP interceptors
     │   ├── guards/                # Guards de rutas
+    │   ├── interceptors/          # HTTP interceptors
     │   ├── models/                # Modelos globales (User, Message, etc.)
+    │   ├── services/              # Servicios singleton (ej: Auth, Socket, API base)
     │   └── utils/                 # Funciones reutilizables (helpers)
-    │
-    ├── shared/                    # Componentes, pipes y módulos reutilizables
-    │   ├── components/            # Ej: Button, Modal, Avatar, etc.
-    │   ├── directives/
-    │   └── pipes/
     │
     ├── features/                  # Funcionalidades agrupadas (modular)
     │   ├── chat/                  # Todo lo relacionado al chat
@@ -37,7 +32,7 @@ src/
     │       │   ├── footerbar/
     │       │   └── navbar/    
     │       ├── main-layout.html  
-    │       └── main-layout.ts
+    │       └── main-layout.ts    
     │
     ├── pages/                     # Páginas no relacionadas con features (Landing, Error 404, Login)
     │   ├── home/
@@ -52,6 +47,11 @@ src/
     │   │   └── home.ts    
     │   ├── login/
     │   └── not-found/
+    │
+    ├── shared/                    # Componentes, pipes y módulos reutilizables
+    │   ├── components/            # Ej: Button, Modal, Avatar, etc.
+    │   ├── directives/
+    │   └── pipes/
     │
     ├── app-routing.module.ts
     └── app.component.ts
@@ -82,6 +82,7 @@ ng generate component pages/not-found
 ```bash
 ng generate service core/services/user-service
 ng generate service core/services/room-service
+ng generate service core/services/messages-service
 ```
 
 ## app.routes.ts

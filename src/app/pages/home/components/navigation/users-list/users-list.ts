@@ -30,7 +30,7 @@ export class UsersList {
       next: (data) => this.apiResponseUser.set(data),
       error: (err) => {
         console.error('Error:', err);
-        // Ya viene como ApiResponse en caso de error, así que lo manejas en el HTML.
+        this.isLoading.set(false);
       },
       complete: () => this.isLoading.set(false),
     });

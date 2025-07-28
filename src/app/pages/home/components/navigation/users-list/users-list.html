@@ -8,8 +8,8 @@
 
     @if (!apiResponseUser()?.isSuccess) {
       <app-error
-        [statusCode]="apiResponseUser()?.statusCode"
-        [message]="apiResponseUser()?.message">
+        [statusCode]="404"
+        [message]="'Sin Usuarios'">
       </app-error>
     } @else {
 
