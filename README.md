@@ -169,7 +169,10 @@ export const environment = {
 npm install angular-oauth2-oidc
 ```
 
-**Configurar app.config.ts**
+**Configurar**
+- app.config.ts
+- auth-service.ts
+- navbar.ts
 ```typescript
 import { SocialAuthServiceConfig, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { environment } from '../environments/environment';

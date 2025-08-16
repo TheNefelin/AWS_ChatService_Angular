@@ -7,13 +7,13 @@
   </div>
 
   <div class="navbar-end">
-    @if (isLoading && !isLoggedIn) {
+    @if(isLoading$ | async){
       <a class="btn">
         <app-loading/>
         Cargando...
       </a>
     } @else {
-      @if (isLoggedIn) {
+      @if(isLoggedIn$ | async) {
         <a class="btn" (click)="logout()">
           <img class="size-6 rounded-box" src="/assets/logout.svg" alt="Logout Gmail"/>      
           Cerrar Sesión
@@ -22,8 +22,8 @@
         <a class="btn" (click)="login()">
           <img class="size-6 rounded-box" src="/assets/google.svg" alt="Login Gmail"/>      
           Iniciar Sesión
-        </a>
-      }
+        </a>   
+      }  
     }
   </div>
 </div>
