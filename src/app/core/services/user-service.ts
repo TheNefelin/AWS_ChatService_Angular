@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  private _apiUrl = `${environment.apiBaseUrl}/Users`;
+  private _apiUrl = `${environment.API_BASE_URL}/Users`;
   private errorApiResponse<T>(message = 'Fallo de red o servidor no disponible'): ApiResponse<T> {
     return {
       isSuccess: false,

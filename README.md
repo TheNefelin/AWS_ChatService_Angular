@@ -1,17 +1,21 @@
 # AWS ChatService Angular 20.1.2
 
-### Structure
+### Estructura
 ```
 src/
 ├── assets/
 │
 └── app/
-    ├── core/                      # Funciones esenciales y globales
-    │   ├── guards/                # Guards de rutas
-    │   ├── interceptors/          # HTTP interceptors
-    │   ├── models/                # Modelos globales (User, Message, etc.)
-    │   ├── services/              # Servicios singleton (ej: Auth, Socket, API base)
-    │   └── utils/                 # Funciones reutilizables (helpers)
+    ├── core/                         # Funciones esenciales y globales
+    │   ├── guards/                   # Guards de rutas
+    │   ├── interceptors/             # HTTP interceptors
+    │   ├── models/                   # Modelos globales (User, Message, etc.)
+    │   ├── services/                 # Servicios singleton (ej: Auth, Socket, API base)
+    │   │   ├── auth-service.ts
+    │   │   ├── message-service.ts    
+    │   │   ├── room-service.spec.ts
+    │   │   └── user-service.ts    
+    │   └── utils/                    # Funciones reutilizables (helpers)
     │
     ├── features/                  # Funcionalidades agrupadas (modular)
     │   ├── chat/                  # Todo lo relacionado al chat
@@ -30,7 +34,11 @@ src/
     │   └── main-layout/           # Header, sidebar, footer, etc.
     │       ├── components/
     │       │   ├── footerbar/
-    │       │   └── navbar/    
+    │       │   │   ├── footerbar.html  
+    │       │   │   └── footerbar.ts    
+    │       │   └── navbar/
+    │       │       ├── navbar.html  
+    │       │       └── navbar.ts 
     │       ├── main-layout.html  
     │       └── main-layout.ts    
     │
@@ -41,7 +49,7 @@ src/
     │   │   │   │   ├── chat-input/
     │   │   │   │   └── message-list/         
     │   │   │   └── navigation/   
-    │   │   │       ├── rooms-list/
+    │   │   │       ├── rooms-list/ 
     │   │   │       └── users-list/        
     │   │   ├── home.html  
     │   │   └── home.ts    
@@ -57,7 +65,7 @@ src/
     └── app.component.ts
 ```
 
-### Commands
+### Crear Componentes
 - Components
 ```bash
 ng generate component shared/components/loading
@@ -80,12 +88,15 @@ ng generate component pages/not-found
 ```
 - Services
 ```bash
-ng generate service core/services/user-service
-ng generate service core/services/room-service
+ng generate service core/services/api-base-service
+ng generate service core/services/auth-service
 ng generate service core/services/messages-service
+ng generate service core/services/room-service
+ng generate service core/services/user-service
 ```
 
-## app.routes.ts
+## Rutas anidadas de navegación
+- app.routes.ts
 ```typescript
 import { Routes } from '@angular/router';
 import { MainLayout } from './layout/main-layout/main-layout';
@@ -105,7 +116,8 @@ export const routes: Routes = [
 ];
 ```
 
-## tsconfig.json
+## Alias de rutas para simplificar el código
+- tsconfig.json
 ```json
 {
   "compilerOptions": {
@@ -118,7 +130,7 @@ export const routes: Routes = [
 }
 ```
 
-## environment.ts
+## Variables de entorno
 - src/environments/environment.ts
 ```typescript
 export const environment = {
@@ -128,7 +140,8 @@ export const environment = {
 };
 ```
 
-## server.ts
+## Deshabilitar temporalmente la verificación de certificados SSL/TLS
+- server.ts
 ```typescript
 // Configuración SSL segura
 if (!environment.production && environment.ignoreSSL) {
@@ -136,6 +149,53 @@ if (!environment.production && environment.ignoreSSL) {
   console.warn('⚠️  SSL verification disabled (development only)');
 }
 ```
+
+## Autenticacion con Google
+- [Google Console](https://console.cloud.google.com/apis)
+- [Google oAuth2](https://developers.google.com/identity/openid-connect/openid-connect)
+
+**Variables de entorno**
+```typescript
+export const environment = {
+  production: false,
+  ignoreSSL: true,
+  API_BASE_URL: process.env['API_BASE_URL'] ?? 'https://localhost:7081/api',
+  GOOGLE_CLIENT_ID: process.env['GOOGLE_CLIENT_ID'] ?? 'GOOGLE_CLIENT_ID'
+};
+```
+
+**Biblioteca**
+```sh
+npm install angular-oauth2-oidc
+```
+
+**Configurar app.config.ts**
+```typescript
+import { SocialAuthServiceConfig, GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { environment } from '../environments/environment';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    // tus otros providers...
+    provideOAuthClient() 
+  ]
+};
+```
+
+## CSS
+- Nav + Main + Footer
+```css
+.layout {
+  display: grid;
+  min-height:  100dvh;
+  grid-template-rows: auto 1fr auto;
+}
+```
+
+---
+---
+---
+---
 
 # AWSChatServiceAngular
 

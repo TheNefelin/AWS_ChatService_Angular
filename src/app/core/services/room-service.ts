@@ -9,7 +9,7 @@ import { environment } from 'environments/environment';
   providedIn: 'root'
 })
 export class RoomService {
-  private _apiUrl = `${environment.apiBaseUrl}/ChatRooms`;
+  private _apiUrl = `${environment.API_BASE_URL}/ChatRooms`;
 
   constructor(private http:HttpClient) {}
   

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MessageService {
-  readonly _apiUrl = `${environment.apiBaseUrl}/Messages`;
+  readonly _apiUrl = `${environment.API_BASE_URL}/Messages`;
   readonly isLoading = signal(false);
 
   constructor(private http:HttpClient) {}
