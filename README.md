@@ -17,21 +17,21 @@ src/
     │   │   └── user-service.ts    
     │   └── utils/                    # Funciones reutilizables (helpers)
     │
-    ├── features/                  # Funcionalidades agrupadas (modular)
-    │   ├── chat/                  # Todo lo relacionado al chat
-    │   │   ├── components/        # ChatRoomList, MessageList, ChatHeader, etc.
-    │   │   ├── pages/             # ChatPage, NewChatPage, etc.
-    │   │   ├── services/          # ChatService, MessageService
+    ├── features/                     # Funcionalidades agrupadas (modular)
+    │   ├── chat/                     # Todo lo relacionado al chat
+    │   │   ├── components/           # ChatRoomList, MessageList, ChatHeader, etc.
+    │   │   ├── pages/                # ChatPage, NewChatPage, etc.
+    │   │   ├── services/             # ChatService, MessageService
     │   │   └── chat-routing.module.ts
     │   │
-    │   └── user/                  # Funcionalidad de usuarios
-    │       ├── components/        # UserList, UserCard, etc.
-    │       ├── pages/             # UserProfilePage, etc.
-    │       ├── services/          # UserService
+    │   └── user/                     # Funcionalidad de usuarios
+    │       ├── components/           # UserList, UserCard, etc.
+    │       ├── pages/                # UserProfilePage, etc.
+    │       ├── services/             # UserService
     │       └── user-routing.module.ts
     │
-    ├── layout/                    # Layouts generales (con sidebar, sin sidebar, etc.)
-    │   └── main-layout/           # Header, sidebar, footer, etc.
+    ├── layout/                       # Layouts generales (con sidebar, sin sidebar, etc.)
+    │   └── main-layout/              # Header, sidebar, footer, etc.
     │       ├── components/
     │       │   ├── footerbar/
     │       │   │   ├── footerbar.html  
@@ -42,7 +42,7 @@ src/
     │       ├── main-layout.html  
     │       └── main-layout.ts    
     │
-    ├── pages/                     # Páginas no relacionadas con features (Landing, Error 404, Login)
+    ├── pages/                        # Páginas no relacionadas con features (Landing, Error 404, Login)
     │   ├── home/
     │   │   ├── components/
     │   │   │   ├── chat-area/
@@ -56,8 +56,8 @@ src/
     │   ├── login/
     │   └── not-found/
     │
-    ├── shared/                    # Componentes, pipes y módulos reutilizables
-    │   ├── components/            # Ej: Button, Modal, Avatar, etc.
+    ├── shared/                       # Componentes, pipes y módulos reutilizables
+    │   ├── components/               # Ej: Button, Modal, Avatar, etc.
     │   ├── directives/
     │   └── pipes/
     │
